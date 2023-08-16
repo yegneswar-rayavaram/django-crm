@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table, th, td {
+  border: 1px solid black;
+}
+    </style>
+</head>
+<body>
+    <h1>Here are the details of my best friends</h1>
+    {{peoples}}
+    <h1>now i will display them in tables</h1>
+    <table>
+        <tr>
+            <th>S.NO</th>
+            <th>NAME</th>
+            <th>AGE</th>
+            <th>CAN VOTE</th>
+        </tr>
+
+        {%for people in peoples%}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{people.name}}</td>
+            <td>{{people.age}}</td>
+            <td>
+                {% if people.age >= 18 %}
+                👍
+                {% else %}
+                👎
+                {%endif%}
+            </td>
+        </tr>
+        {%endfor%}
+    </table>
+
+</body>
+</html>

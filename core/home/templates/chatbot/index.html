@@ -1,0 +1,25 @@
+<!-- chatbot/templates/chatbot_response.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chatbot Response</title>
+</head>
+<body>
+    <h1>Chatbot Response</h1>
+    <div id="chatbot-response">
+        <!-- The chatbot's response will be displayed here -->
+    </div>
+
+    <!-- JavaScript for Ajax to send queries to the chatbot -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function getChatbotResponse() {
+            var userQuery = prompt('Enter your message:');
+            $.post('/chatbot-response/', {query: userQuery}, function(data) {
+                $('#chatbot-response').text(data.response);
+            });
+        }
+    </script>
+</body>
+</html>

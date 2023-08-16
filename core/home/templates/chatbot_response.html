@@ -1,0 +1,47 @@
+<!-- chatbot/templates/chatbot_response.html -->
+
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chatbot Response</title>
+    <link rel="stylesheet" href="{% static 'css/chatbot_response.css' %}">
+</head>
+<body>
+    <h1>Chatbot Response</h1>
+    <form id="chatbot-form">
+        <input type="text" id="user-query" placeholder="Type your message...">
+        <button type="button" id="send-button">Send</button>
+    </form>
+    <div id="chatbot-response">
+        {% if response %}
+            <p>{{ response }}</p>
+        {% endif %}
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#send-button').click(function() {
+                getChatbotResponse();
+            });
+        });
+
+        function getChatbotResponse() {
+            var userQuery = $('#user-query').val();
+            $.ajax({
+                url: '/chatbot-response/',
+                type: 'POST',
+                data: {query: userQuery},
+                success: function(data) {
+                    console.log(data); // This will print the response from the server to the console
+                    $('#chatbot-response').text(data.response);
+                },
+                error: function(xhr, status, error) {
+                    alert("Error: " + error); // Display an alert on error
+                }
+            });
+        }
+    </script>
+</body>
+</html>
